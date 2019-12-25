@@ -1,9 +1,5 @@
-cat << EOF > test.c
-#include <stdio.h>
-#include <assert.h>
-#include <stdlib.h>
-EOF
+cat include/*.h include/*.c | grep '#include <' | sort | uniq > test.c
 
-./gcc.sh -E -nostdinc "$@" | grep -v '^#' | clang-format >> test.c
+./bin/gcc.sh -E -nostdinc "$@" | grep -v '^#' | clang-format >> test.c
 
 
